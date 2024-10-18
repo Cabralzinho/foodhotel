@@ -11,6 +11,10 @@ const config: Config = {
       colors: {
        primaryColor: "#0ca092",
        secondaryColor: "#57e1d4",
+       tertiaryColor: "#F3F4F6",
+      },
+      fontFamily: {
+        lobster: ["Lobster", "cursive"],
       },
     },
   },
