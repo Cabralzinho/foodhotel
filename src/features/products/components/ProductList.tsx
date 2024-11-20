@@ -7,10 +7,6 @@ import Image from "next/image";
 export const ProductList = () => {
   const { products } = useProducts();
 
-  const addProductToCart = () => {
-    
-  }
-
   return (
     <ul className="divide-y divide-zinc-300">
       {products?.map((product) => (
@@ -21,10 +17,7 @@ export const ProductList = () => {
           <div className="w-full">
             <h2 className="font-bold">{product.name}</h2>
             <p className="text-sm opacity-50">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Doloribus ab voluptates perferendis autem. Voluptatum, veniam
-              nostrum nobis iste nisi id animi ea modi in commodi voluptate
-              suscipit voluptatibus dolore iure!
+              {product.description}
             </p>
           </div>
           <div className="flex flex-col gap-1 items-end">

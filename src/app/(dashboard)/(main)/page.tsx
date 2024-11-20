@@ -27,7 +27,7 @@ export default function Home() {
           Adicionar produtos
         </Link>
         <Link
-          href="/products"
+          href="/guest/2/store"
           className="w-full max-w-[250px] bg-white text-primaryColor px-10 py-2 rounded-lg hover:bg-gray-200 transition-all text-center border border-black"
         >
           Lançar consumo

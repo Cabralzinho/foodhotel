@@ -13,11 +13,11 @@ export const useGuest = (config: Config) => {
             companions: [
                 {
                     id: 1,
-                    name: "Ezequiel Santos Hentai",
+                    name: "Ezequiel Santos",
                 },
                 {
                     id: 2,
-                    name: "Pedro Visage Infinito",
+                    name: "Pedro Visage",
                 }
             ],
             room: 69,

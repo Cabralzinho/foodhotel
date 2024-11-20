@@ -3,12 +3,20 @@ import { IProduct } from "@/types/products";
 import { useQuery } from "@tanstack/react-query";
 
 export const useProducts = () => {
-  const { data: products, ...rest } = useQuery<IProduct[]>({
-    queryFn: async () => {
-      const response = await api.get("/products");
+  const fetchProducts = async () => {
+    const authToken = localStorage.getItem("authToken");
 
-      return response.data;
-    },
+    const response = await api.get("/products", {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+
+    return response.data;
+  };
+
+  const { data: products, ...rest } = useQuery<IProduct[]>({
+    queryFn: fetchProducts,
     queryKey: ["products"],
     staleTime: Infinity,
     refetchInterval: 1000 * 60 * 2,
@@ -16,6 +24,6 @@ export const useProducts = () => {
 
   return {
     products,
-    ...rest
-  }
+    ...rest,
+  };
 };

@@ -2,7 +2,7 @@
 
 import { useDecreaseGuestCart } from "@/features/guest/hooks/useDecreaseGuestCart";
 import { useIncreaseGuestCart } from "@/features/guest/hooks/useIncreaseGuestCart";
-import { useCart } from "@/features/orders/hooks/useCart";
+import { useCart } from "@/features/guest/hooks/useGuestCart";
 import { Button, Drawer } from "@mui/material";
 import { IoIosClose } from "react-icons/io";
 
