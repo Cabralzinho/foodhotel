@@ -1,12 +1,14 @@
 "use client";
 
 import { Close } from "@/components/Icons/Close";
+import { useLogout } from "@/features/auth/hooks/useLogout";
 import { Modal } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
+  const logout = useLogout();
 
   const handleOpen = () => {
     setOpen(true);
@@ -17,38 +19,40 @@ export default function Home() {
   };
 
   return (
-    <>
-      <h1 className="font-lobster text-6xl text-center pt-5">10FoodHotel</h1>
-      <section className="flex flex-col justify-center items-center w-full gap-8 h-full max-h-[500px]">
+    <main className="flex flex-col justify-center min-h-full">
+      <h1 className="font-lobster text-6xl text-center pt-5 absolute flex justify-center top-0 w-full">
+        10FoodHotel
+      </h1>
+      <section className="flex flex-col justify-center items-center w-full gap-5">
         <Link
           href="/admin/products"
-          className="w-full max-w-[250px] bg-white text-primaryColor px-10 py-2 rounded-lg hover:bg-gray-200 transition-all text-center border border-black"
+          className="w-full max-w-[250px] bg-white text-primaryColor px-10 py-4 rounded-lg hover:bg-gray-200 transition-all text-center shadow-md"
         >
           Adicionar produtos
         </Link>
         <Link
           href="/guest/2/store"
-          className="w-full max-w-[250px] bg-white text-primaryColor px-10 py-2 rounded-lg hover:bg-gray-200 transition-all text-center border border-black"
+          className="w-full max-w-[250px] bg-white text-primaryColor px-10 py-4 rounded-lg hover:bg-gray-200 transition-all text-center shadow-md"
         >
           Lançar consumo
         </Link>
 
         <Link
           href={"/guest/2"}
-          className="w-full max-w-[250px] bg-white text-primaryColor px-10 py-2 rounded-lg hover:bg-gray-200 transition-all text-center border border-black"
+          className="w-full max-w-[250px] bg-white text-primaryColor px-10 py-4 rounded-lg hover:bg-gray-200 transition-all text-center shadow-md"
         >
           Consultar conta
         </Link>
 
         <Link
           href="#"
-          className="max-w-[250px] bg-white text-primaryColor px-10 py-2 rounded-lg hover:bg-gray-200 transition-all w-full text-center border border-black"
+          className="max-w-[250px] bg-white text-primaryColor px-10 py-4 rounded-lg hover:bg-gray-200 transition-all w-full text-center shadow-md"
         >
           Comandos abertas
         </Link>
         <button
           onClick={handleOpen}
-          className="bg-white text-primaryColor px-10 py-2 rounded-lg hover:bg-gray-200 transition-all w-full max-w-[250px] border border-black"
+          className="bg-white text-primaryColor px-10 py-4 rounded-lg hover:bg-gray-200 transition-all w-full max-w-[250px] shadow-md"
         >
           Configurações
         </button>
@@ -74,13 +78,16 @@ export default function Home() {
               <button className="bg-primaryColor px-10 py-2 rounded-lg hover:bg-primaryColor/80 transition-all w-full">
                 Conta
               </button>
-              <button className="bg-primaryColor px-10 py-2 rounded-lg hover:bg-primaryColor/80 transition-all w-full">
+              <button
+                onClick={logout}
+                className="bg-red-500 px-10 py-2 rounded-lg hover:bg-red-600 transition-all w-full"
+              >
                 Sair
               </button>
             </div>
           </div>
         </Modal>
       </section>
-    </>
+    </main>
   );
 }

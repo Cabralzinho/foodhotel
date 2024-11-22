@@ -4,9 +4,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="h-screen">
+    <div className="h-screen bg-gradient-to-tl from-primaryColor to-secondaryColor">
       {children}
       {/* <Footer /> */}
-    </main>
+    </div>
   );
 }

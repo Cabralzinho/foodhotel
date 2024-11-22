@@ -1,6 +1,7 @@
 import { api } from "@/libs/api";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
 export const useLogin = () => {
@@ -19,20 +20,16 @@ export const useLogin = () => {
         password,
       });
 
-      if (response.status !== 200) {
-        throw new Error("Algo deu errado");
-      }
-
       const { token } = await response.data;
 
-      localStorage.setItem("authToken", token);
+      Cookies.set("authToken", token, {expires: 1});
 
       return token;
     },
 
     onSuccess: () => {
       toast.success("Login efetuado com sucesso");
-      
+
       router.push("/");
     },
     onError: () => {

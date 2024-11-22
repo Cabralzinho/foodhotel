@@ -1,5 +1,5 @@
 import { ArrowLeft } from "@/components/Icons/ArrowLeft";
-import { ProductForm } from "@/features/products/components/ProductForm";
+import { AddProductForm } from "@/features/products/components/AddProductForm";
 import { Toaster } from "react-hot-toast";
 
 export default function Products() {
@@ -11,7 +11,7 @@ export default function Products() {
         <h1 className="font-lobster text-6xl text-center">10Food Hotel</h1>
       </div>
 
-      <ProductForm />
+      <AddProductForm />
     </main>
   );
 }
