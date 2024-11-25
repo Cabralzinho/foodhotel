@@ -4,24 +4,29 @@ import toast from "react-hot-toast";
 
 export const useAddProduct = () => {
   return useMutation({
-    mutationFn: async (data: AddProductData) => {
+    mutationFn: async (args: Args) => {
       const formData = new FormData();
 
-      formData.append("name", data.name);
-      formData.append("description", data.description);
-      formData.append("price", data.price.toString());
-      formData.append("amount", data.amount.toString());
-      formData.append("category", data.category);
-      
-      if (data.image) {
-        formData.append("image", data.image);
+      formData.append("name", args.data.name);
+      formData.append("description", args.data.description);
+      formData.append("price", args.data.price.toString());
+      formData.append("amount", args.data.amount.toString());
+      formData.append("category", args.data.category);
+
+      if (args.data.image) {
+        formData.append("image", args.data.image);
       }
-      
-      const response = await api.post("/products", formData);
+
+      const response = await api.post("/products", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      });
 
       return response.data;
     },
-    onSuccess: () => {
+    onSuccess: (_, args) => {
+      args.onSucess?.();
       toast.success("Produto adicionado com sucesso");
     },
     onError: () => {
@@ -38,3 +43,8 @@ type AddProductData = {
   amount: number;
   image?: File;
 };
+
+type Args = {
+  onSucess?: () => void;
+  data: AddProductData;
+}

@@ -17,6 +17,7 @@ type CategorySelectorProps = {
 export const CategorySelector = ({
   value,
   required,
+  disabled,
   onChange,
 }: CategorySelectorProps) => {
   const handleChange = (e: SelectChangeEvent<string>) => {
@@ -24,7 +25,7 @@ export const CategorySelector = ({
   };
 
   return (
-    <FormControl className="w-full" required={required}>
+    <FormControl className="w-full" disabled={disabled} required={required}>
       <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
       <Select
         labelId="demo-simple-select-label"

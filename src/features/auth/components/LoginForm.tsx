@@ -13,12 +13,12 @@ const schema = z.object({
 });
 
 export const LoginForm = () => {
-  const { login } = useLogin();
+  const { login, isPending } = useLogin();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormProps>({
     mode: "all",
     resolver: zodResolver(schema),
@@ -37,6 +37,7 @@ export const LoginForm = () => {
 
       <TextField
         {...register("email")}
+        disabled={isPending}
         error={!!errors.email}
         helperText={errors.email?.message}
         className="w-full"
@@ -46,6 +47,7 @@ export const LoginForm = () => {
       />
       <TextField
         {...register("password")}
+        disabled={isPending}
         error={!!errors.password}
         helperText={errors.password?.message}
         className="w-full"
@@ -56,7 +58,7 @@ export const LoginForm = () => {
       />
 
       <Button
-        disabled={!!errors.email && !!errors.password}
+        disabled={!isValid || isPending}
         type="submit"
         className="w-full"
         variant="contained"

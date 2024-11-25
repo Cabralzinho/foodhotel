@@ -11,9 +11,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-       primaryColor: "#0ca092",
-       secondaryColor: "#57e1d4",
-       tertiaryColor: "#F3F4F6",
+       primary: "#0ca092",
+       secondary: "#57e1d4",
+       tertiary: "#F3F4F6",
       },
       fontFamily: {
         lobster: ["Lobster", "cursive"],

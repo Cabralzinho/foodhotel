@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ReactQueryClientProvider } from "@/providers/ReactQueryClientProvider";
+import { MuiThemeProvider } from "@/providers/MuiThemeProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "10FoodHotel",
@@ -15,7 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+        <MuiThemeProvider>
+          <ReactQueryClientProvider>
+            <Toaster position="top-center"/>
+            {children}
+          </ReactQueryClientProvider>
+        </MuiThemeProvider>
       </body>
     </html>
   );

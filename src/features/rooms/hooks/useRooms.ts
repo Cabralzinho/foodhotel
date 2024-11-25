@@ -1,21 +1,17 @@
 import { api } from "@/libs/api";
 import { IProduct } from "@/types/products";
+import { IRoom } from "@/types/rooms";
 import { useQuery } from "@tanstack/react-query";
 
-export const useProducts = () => {
-  const { data: products, ...rest } = useQuery<IProduct[]>({
+export const useRooms = () => {
+  return useQuery<IRoom[]>({
     queryFn: async () => {
-      const response = await api.get("/products");
+      const response = await api.get("/rooms");
 
       return response.data;
     },
-    queryKey: ["products"],
+    queryKey: ["rooms"],
     staleTime: Infinity,
     refetchInterval: 1000 * 60 * 2,
   });
-
-  return {
-    products,
-    ...rest,
-  };
 };

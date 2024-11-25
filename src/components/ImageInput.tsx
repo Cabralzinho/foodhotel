@@ -4,12 +4,14 @@ import { FaImage } from "react-icons/fa";
 type ImageInputProps = {
   image?: File;
   preventRemove?: boolean;
+  disabled?: boolean;
   onChange?: (image?: File) => void;
 };
 
 export const ImageInput = ({
   image,
   preventRemove,
+  disabled,
   onChange,
 }: ImageInputProps) => {
   const ref = useRef<HTMLInputElement>(null);
@@ -25,7 +27,12 @@ export const ImageInput = ({
   };
 
   return (
-    <div onClick={() => ref.current?.click()} className="border-2 border-primaryColor rounded-xl p-2 w-36 h-36 flex items-center justify-center">
+    <div
+      onClick={() => ref.current?.click()}
+      className={`border-2 border-primary rounded-xl p-2 w-36 h-36 flex items-center justify-center ${
+        disabled ? "cursor-not-allowed opacity-70" : "cursor-pointer"
+      }`}
+    >
       {image && (
         <img
           className="w-full h-full object-cover rounded-lg overflow-hidden"
@@ -33,9 +40,12 @@ export const ImageInput = ({
           alt="imagem do produto"
         />
       )}
-      {!image && <FaImage className="h-12 w-12 group-hover:text-primaryColor transition-all"/>}
+      {!image && (
+        <FaImage className="h-12 w-12 group-hover:text-primary transition-all" />
+      )}
 
       <input
+        disabled={disabled}
         onChange={handleChange}
         className="hidden"
         type="file"

@@ -5,9 +5,10 @@ const api = axios.create({
   baseURL: "http://localhost:8080/",
 });
 
-api.interceptors.request.use((config) => {
-  const authToken = Cookies.get("authToken");
+api.interceptors.request.use(async(config) => {
+  await new Promise(resolve => setTimeout(resolve, 1000));
 
+  const authToken = Cookies.get("authToken");
 
   if (authToken) {
     config.headers.Authorization = `Bearer ${authToken}`;

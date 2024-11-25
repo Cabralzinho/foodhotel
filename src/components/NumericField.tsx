@@ -9,6 +9,7 @@ type NumericFieldProps = {
   required?: boolean;
   error?: boolean;
   decimalScale?: number;
+  disabled?: boolean;
   onChange?: (value?: number) => void;
 };
 
@@ -24,10 +25,11 @@ export const NumericField = ({
     <NumericFormat
       className="w-full"
       customInput={TextField}
+      fixedDecimalScale
       onValueChange={(e) => onChange?.(e.floatValue)}
       prefix={prefix}
       label={label}
-      value={value}
+      value={value === undefined ? "" : value}
       decimalScale={decimalScale}
       decimalSeparator={","}
       thousandSeparator={"."}

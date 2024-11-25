@@ -25,23 +25,29 @@ const schema = z.object({
 });
 
 export const AddProductForm = () => {
-  const { mutate: addProduct } = useAddProduct();
+  const { mutate: addProduct, isPending } = useAddProduct();
 
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     getValues,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormProps>({
     mode: "all",
+    defaultValues: {
+      price: undefined,
+      amount: undefined,
+    },
     resolver: zodResolver(schema),
   });
 
   const onSubmitProduct = handleSubmit(async (data) => {
-    const product = data;
-
-    addProduct(product);
+    addProduct({
+      data: data,
+      onSucess: () => reset(),
+    });
   });
 
   return (
@@ -50,6 +56,7 @@ export const AddProductForm = () => {
       className="flex flex-col gap-10 items-center justify-center h-full w-full max-w-[500px]"
     >
       <ImageInput
+        disabled={isPending}
         image={getValues("image")}
         preventRemove={false}
         onChange={(image) => setValue("image", image, { shouldValidate: true })}
@@ -59,6 +66,7 @@ export const AddProductForm = () => {
         <div className="flex gap-4 w-full">
           <TextField
             className="w-full"
+            disabled={isPending}
             required
             helperText={errors.name?.message}
             error={!!errors.name}
@@ -70,11 +78,13 @@ export const AddProductForm = () => {
               setValue("category", value, { shouldValidate: true })
             }
             value={getValues("category")}
+            disabled={isPending}
             required
           />
         </div>
         <div className="flex gap-4 w-full">
           <NumericField
+            disabled={isPending}
             decimalScale={2}
             value={getValues("price")}
             prefix="R$ "
@@ -82,24 +92,30 @@ export const AddProductForm = () => {
             helperText={errors.price?.message}
             error={!!errors.price}
             onChange={(value) =>
-              setValue("price", value as any, { shouldValidate: true })
+              setValue("price", value as any, {
+                shouldValidate: value !== undefined,
+              })
             }
             required
           />
           <NumericField
+            disabled={isPending}
             decimalScale={0}
             value={getValues("amount")}
             label="Quantidade"
             helperText={errors.amount?.message}
             error={!!errors.amount}
             onChange={(value) =>
-              setValue("amount", value as any, { shouldValidate: true })
+              setValue("amount", value as any, {
+                shouldValidate: value !== undefined,
+              })
             }
             required
           />
         </div>
 
         <TextField
+          disabled={isPending}
           helperText={errors.description?.message}
           error={!!errors.description}
           required
@@ -109,7 +125,11 @@ export const AddProductForm = () => {
           {...register("description")}
         />
 
-        <Button type="submit" variant="contained">
+        <Button
+          disabled={isPending || !isValid}
+          type="submit"
+          variant="contained"
+        >
           Adicionar
         </Button>
       </div>

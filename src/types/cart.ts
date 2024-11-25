@@ -1,4 +1,5 @@
 export type IItem = {
+    productId: number,
     id: number,
     name: string,
     price: number,
@@ -10,6 +11,5 @@ export type IItem = {
 export type ICart = {
     id: number,
     roomId: number,
-    items: IItem[],
-    total: number
+    total?: number
 }

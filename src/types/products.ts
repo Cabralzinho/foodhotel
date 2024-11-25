@@ -3,6 +3,6 @@ export type IProduct = {
   name: string;
   price: number;
   amount: number;
-  image?: string;
+  imagePath?: string;
   description: string;
 };
